@@ -93,7 +93,7 @@ optionA.onclick = function() {
     var hiddenArray = [optionB, optionC, optionD];
     for (let i = 0; i < hiddenArray.length; i++) {
         hiddenArray[i].style.visibility = 'hidden';
-    }
+    };
 
     document.getElementById('start').onclick = function() {
         var hiddenArray = [optionA, optionB, optionC, optionD];
@@ -245,7 +245,7 @@ optionA.onclick = function() {
                     rank.textContent = "Your accumulated score is " + scoreFive + " , and you still have " + countDown + " seconds left.";
                     game.textContent = "Your final score is " + finalScore + "!";
                     rank.setAttribute("style", "text-decoration: none; background-color: black; color: white")
-                    var hiddenArray = [optionC, optionD, start];
+                    var hiddenArray = [optionC, optionD, start, timer];
                     for (let i = 0; i < hiddenArray.length; i++) {
                         hiddenArray[i].style.visibility = 'hidden';
                     };
