@@ -4,6 +4,9 @@ var winCount = document.getElementById("win");
 var loseCount = document.getElementById("lose");
 var timer = document.getElementById("timer");
 var notes = document.getElementById("notes");
+var warning = document.getElementById("warning");
+var final = document.getElementById("final");
+var score = document.getElementById("score");
 
 var optionA = document.querySelector(".optionA");
 var optionB = document.querySelector(".optionB");
@@ -18,7 +21,7 @@ function runOutOfTime() {
     notes.innerHTML = "You ran out of time! Game Over!!!";
 }
 
-var countDown = 180;
+var countDown = 100;
 var timerMajor = setInterval(function (){
     countDown--;
     timer.textContent = countDown + " seconds left till you lose!";
@@ -30,7 +33,11 @@ var timerMajor = setInterval(function (){
 
 function wrongChoice() {
     countDown = countDown - 20;
-}
+};
+
+function wrongChoiceMajor() {
+    countDown = countDown - 50
+};
 
 document.getElementById('start').onclick = function() {
     game.textContent = "What does HTML stand for?";
@@ -43,13 +50,13 @@ var wrongAnswer = [optionD, optionC, optionB];
 for (let i = 0; i < wrongAnswer.length; i++) {
     const element = wrongAnswer[i];
     wrongAnswer[i].onclick = function(){
-        notes.textContent = "WRONG!";
+        notes.textContent = "WRONG! Find the right one, so you can move on!";
         wrongChoice();
     };
 };
 optionA.onclick = function() {
     notes.textContent = "";
-    winCount.textContent = "correct! " + countDown + " point(s) are accumulated";
+    winCount.textContent = "correct! " + countDown + " point(s) are accumulated! Press 'Next' to Continue!";
     localStorage.setItem("score1", countDown);
 
     document.getElementById('start').onclick = function() {
@@ -64,7 +71,7 @@ optionA.onclick = function() {
     for (let i = 0; i < wrongAnswer.length; i++) {
         const element = wrongAnswer[i];
         wrongAnswer[i].onclick = function(){
-        notes.textContent = "WRONG!";
+        notes.textContent = "WRONG! Find the right one, so you can move on!";
         wrongChoice();
     };
 };
@@ -72,7 +79,7 @@ optionA.onclick = function() {
         notes.textContent = "";
         var sumPrev = [localStorage.getItem("score1"), countDown];
         var scoreTwo = sumPrev.reduce(getSum, 0);
-        winCount.textContent = "correct! " + scoreTwo + " point(s) are accumulated!";
+        winCount.textContent = "correct! " + scoreTwo + " point(s) are accumulated! Press 'Next' to Continue!";
         localStorage.setItem("score2", scoreTwo);
 
         document.getElementById('start').onclick = function() {
@@ -87,7 +94,7 @@ optionA.onclick = function() {
         for (let i = 0; i < wrongAnswer.length; i++) {
             const element = wrongAnswer[i];
             wrongAnswer[i].onclick = function(){
-            notes.textContent = "WRONG!";
+            notes.textContent = "WRONG! Find the right one, so you can move on!";
             wrongChoice();
             };
         };
@@ -95,7 +102,7 @@ optionA.onclick = function() {
             notes.textContent = "";
             var sumPrev2 = [localStorage.getItem("score2"), countDown];
             var scoreThree = sumPrev2.reduce(getSum, 0);
-            winCount.textContent = "correct! " + scoreThree + " point(s) are accumulated!";
+            winCount.textContent = "correct! " + scoreThree + " point(s) are accumulated! Press 'Next' to Continue!";
             localStorage.setItem("score3", scoreThree);
 
             document.getElementById('start').onclick = function() {
@@ -110,7 +117,7 @@ optionA.onclick = function() {
             for (let i = 0; i < wrongAnswer.length; i++) {
                 const element = wrongAnswer[i];
                 wrongAnswer[i].onclick = function(){
-                notes.textContent = "WRONG!";
+                notes.textContent = "WRONG! Find the right one, so you can move on!";
                 wrongChoice();
                 };
             };
@@ -118,12 +125,12 @@ optionA.onclick = function() {
                 notes.textContent = "";
                 var sumPrev3 = [localStorage.getItem("score3"), countDown];
                 var scoreFour = sumPrev3.reduce(getSum, 0);
-                winCount.textContent = "correct! " + scoreFour + " point(s) are accumulated!";
+                winCount.textContent = "correct! " + scoreFour + " point(s) are accumulated! Press 'Next' to Continue!";
                 localStorage.setItem("score4", scoreFour);
 
                 document.getElementById('start').onclick = function() {
                     winCount.textContent = "";
-                    game.textContent = "How many hours [per week] dose a bootcamp student usually need to practice coding outside the class?";
+                    game.textContent = "How many hours [per week] should a bootcamp student usually spend to practice coding outside the class?";
                     optionA.textContent = "0";
                     optionB.textContent = "10";
                     optionC.textContent = "25";
@@ -133,16 +140,21 @@ optionA.onclick = function() {
                 for (let i = 0; i < wrongAnswer.length; i++) {
                     const element = wrongAnswer[i];
                     wrongAnswer[i].onclick = function(){
-                    notes.textContent = "WRONG!";
-                    wrongChoice();
+                    notes.textContent = "WRONG! You do not have much time left!";
+                    wrongChoiceMajor();
+                    warning.textContent = "A wrong answer deducts more time than before in this round by the way! 😈";
                     };
                 };
                 optionC.onclick = function() {
                     notes.textContent = "";
                     var sumPrev4 = [localStorage.getItem("score4"), countDown];
                     var scoreFive = sumPrev4.reduce(getSum, 0);
-                    winCount.textContent = "correct! " + scoreFive + " point(s) are accumulated!";
+                    winCount.textContent = "correct! " + scoreFive + " point(s) are accumulated! This is the end of the quiz!";
+                    clearInterval(timerMajor);
                     localStorage.setItem("score5", scoreFive);
+                    var finalScore = scoreFive * countDown;
+                    final.textContent = "Your accumulated score is " + scoreFive + " , and you still have " + countDown + " seconds left.";
+                    score.textContent = "Your final score is " + finalScore + "!";
                 }
             }
         }
