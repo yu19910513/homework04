@@ -1,5 +1,4 @@
-var start = document.querySelector(".start");
-var next = document.querySelector(".next");
+var start = document.getElementById('start');
 var game = document.getElementById('main');
 var winCount = document.getElementById("win");
 var loseCount = document.getElementById("lose");
@@ -15,78 +14,137 @@ function getSum(total, num) {
     return total + Math.round(num);
   }
 
-start.addEventListener("click", function(event) {
-    event.preventDefault();
+function runOutOfTime() {
+    notes.innerHTML = "You ran out of time! Game Over!!!";
+}
+
+var countDown = 180;
+var timerMajor = setInterval(function (){
+    countDown--;
+    timer.textContent = countDown + " seconds left till you lose!";
+    if (countDown === 0){
+        clearInterval(timerMajor);
+        runOutOfTime();
+    }
+} ,1000);
+
+function wrongChoice() {
+    countDown = countDown - 20;
+}
+
+document.getElementById('start').onclick = function() {
     game.textContent = "What does HTML stand for?";
     optionA.textContent = "Hypertext Markup Language";
     optionB.textContent = "Hypetext Markup Linguine";
     optionC.textContent = "Hypotext Makeup Language";
     optionD.textContent = "Hyper Text Makeup Language";
-    var countDown = 6;
-    var timerMajor = setInterval(function (){
-        countDown--;
-        timer.textContent = countDown + " seconds left till you lose!";
-    if (countDown == 0){
-        clearInterval(timerMajor);
-        runOutOfTime()}
-    optionA.addEventListener("click", function(){
-        winCount.textContent = "correct! " + countDown + " point(s) are accumulated";
-        clearInterval(timerMajor);
-        localStorage.setItem("score1", countDown);});
+};
+var wrongAnswer = [optionD, optionC, optionB];
+for (let i = 0; i < wrongAnswer.length; i++) {
+    const element = wrongAnswer[i];
+    wrongAnswer[i].onclick = function(){
+        notes.textContent = "WRONG!";
+        wrongChoice();
+    };
+};
+optionA.onclick = function() {
+    notes.textContent = "";
+    winCount.textContent = "correct! " + countDown + " point(s) are accumulated";
+    localStorage.setItem("score1", countDown);
 
+    document.getElementById('start').onclick = function() {
+        winCount.textContent = "";
+        game.textContent = "What does JSON stand for?";
+        optionA.textContent = "Java's Son";
+        optionB.textContent = "Javis is On";
+        optionC.textContent = "JavaScript Object Notation";
+        optionD.textContent = "JavaScript Orientation Notation";
+    };
+    var wrongAnswer = [optionA, optionB, optionD];
+    for (let i = 0; i < wrongAnswer.length; i++) {
+        const element = wrongAnswer[i];
+        wrongAnswer[i].onclick = function(){
+        notes.textContent = "WRONG!";
+        wrongChoice();
+    };
+};
+    optionC.onclick = function() {
+        notes.textContent = "";
+        var sumPrev = [localStorage.getItem("score1"), countDown];
+        var scoreTwo = sumPrev.reduce(getSum, 0);
+        winCount.textContent = "correct! " + scoreTwo + " point(s) are accumulated!";
+        localStorage.setItem("score2", scoreTwo);
 
-        next.addEventListener("click", function(event) {
+        document.getElementById('start').onclick = function() {
             winCount.textContent = "";
-            event.preventDefault();
-            game.textContent = "What does JSON stand for?";
-            optionA.textContent = "Java's Son";
-            optionB.textContent = "Javis is On";
-            optionC.textContent = "JavaScript Object Notation";
-            optionD.textContent = "JavaScript Orientation Notation";
-            var countDown2 = 6;
-            var timerMajor2 = setInterval(function (){
-                countDown2--;
-                timer.textContent = countDown2 + " seconds left till you lose!";
-            if (countDown2 == 0){
-                clearInterval(timerMajor2);
-                runOutOfTime()}
-            optionC.addEventListener("click", function(){
-                clearInterval(timerMajor2);
-                var sumPrev = [localStorage.getItem("score1"), countDown2];
-                var scoreTwo = sumPrev.reduce(getSum, 0)
-                winCount.textContent = "correct! " + scoreTwo + " point(s) are accumulated!";
-                localStorage.setItem("score2", scoreTwo);});
+            game.textContent = "What does CSS stand for?";
+            optionA.textContent = "Color & Style Sheets";
+            optionB.textContent = "Computer Style Sheets";
+            optionC.textContent = "Chinese Styles Rule";
+            optionD.textContent = "Cascading Style Sheets ";
+        };
+        var wrongAnswer = [optionA, optionB, optionC];
+        for (let i = 0; i < wrongAnswer.length; i++) {
+            const element = wrongAnswer[i];
+            wrongAnswer[i].onclick = function(){
+            notes.textContent = "WRONG!";
+            wrongChoice();
+            };
+        };
+        optionD.onclick = function() {
+            notes.textContent = "";
+            var sumPrev2 = [localStorage.getItem("score2"), countDown];
+            var scoreThree = sumPrev2.reduce(getSum, 0);
+            winCount.textContent = "correct! " + scoreThree + " point(s) are accumulated!";
+            localStorage.setItem("score3", scoreThree);
 
+            document.getElementById('start').onclick = function() {
+                winCount.textContent = "";
+                game.textContent = "What does API stand for?";
+                optionA.textContent = "Application Programming Interface";
+                optionB.textContent = "Analyzing Program Interaction";
+                optionC.textContent = "Apple orange and ice cream";
+                optionD.textContent = "Asian Population Increase";
+            };
+            var wrongAnswer = [optionC, optionB, optionD];
+            for (let i = 0; i < wrongAnswer.length; i++) {
+                const element = wrongAnswer[i];
+                wrongAnswer[i].onclick = function(){
+                notes.textContent = "WRONG!";
+                wrongChoice();
+                };
+            };
+            optionA.onclick = function() {
+                notes.textContent = "";
+                var sumPrev3 = [localStorage.getItem("score3"), countDown];
+                var scoreFour = sumPrev3.reduce(getSum, 0);
+                winCount.textContent = "correct! " + scoreFour + " point(s) are accumulated!";
+                localStorage.setItem("score4", scoreFour);
 
-
-                next.addEventListener("click", function(event) {
+                document.getElementById('start').onclick = function() {
                     winCount.textContent = "";
-                    event.preventDefault();
-                    game.textContent = "What does CSS stand for?";
-                    optionA.textContent = "Color & Style Sheets";
-                    optionB.textContent = "Computer Style Sheets";
-                    optionC.textContent = "Chinese Styles Rule";
-                    optionD.textContent = "Cascading Style Sheets ";
-                    var countDown3 = 6;
-                    var timerMajor3 = setInterval(function (){
-                        countDown3--;
-                        timer.textContent = countDown3 + " seconds left till you lose!";
-                    if (countDown == 0){
-                        clearInterval(timerMajor3);
-                        runOutOfTime()}
-                    optionD.addEventListener("click", function(){
-                        clearInterval(timerMajor3);
-                        var sumPrev2 = [localStorage.getItem("score2"), countDown3];
-                        var scoreThree = sumPrev2.reduce(getSum, 0)
-                        winCount.textContent = "correct! " + scoreThree + " point(s) are accumulated!";
-                        localStorage.setItem("score3", scoreThree);});
-                    }, 1000)});
-
-            }, 1000)});
-
-
-    }, 1000)});
-
-
-function runOutOfTime() {
-    notes.innerHTML = "you ran out of time! press next to continue!";}
+                    game.textContent = "How many hours [per week] dose a bootcamp student usually need to practice coding outside the class?";
+                    optionA.textContent = "0";
+                    optionB.textContent = "10";
+                    optionC.textContent = "25";
+                    optionD.textContent = "80";
+                };
+                var wrongAnswer = [optionA, optionB, optionD];
+                for (let i = 0; i < wrongAnswer.length; i++) {
+                    const element = wrongAnswer[i];
+                    wrongAnswer[i].onclick = function(){
+                    notes.textContent = "WRONG!";
+                    wrongChoice();
+                    };
+                };
+                optionC.onclick = function() {
+                    notes.textContent = "";
+                    var sumPrev4 = [localStorage.getItem("score4"), countDown];
+                    var scoreFive = sumPrev4.reduce(getSum, 0);
+                    winCount.textContent = "correct! " + scoreFive + " point(s) are accumulated!";
+                    localStorage.setItem("score5", scoreFive);
+                }
+            }
+        }
+    }
+}
