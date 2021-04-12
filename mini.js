@@ -8,7 +8,7 @@ var warning = document.getElementById("warning");
 var final = document.getElementById("final");
 var score = document.getElementById("score");
 var form = document.querySelector(".form");
-
+var rank = document.querySelector(".rank")
 var optionA = document.querySelector(".optionA");
 var optionB = document.querySelector(".optionB");
 var optionC = document.querySelector(".optionC");
@@ -16,13 +16,13 @@ var optionD = document.querySelector(".optionD");
 
 var loser = "You ran out of time! Game Over!!!";
 
+
 /* my calculator */
 function getSum(total, num) {
     return total + Math.round(num);
 };
 
 function runOutOfTime() {
-    var red
     notes.innerHTML = loser.fontcolor("red");
     var hiddenArray = [optionB, optionC, optionD, optionA, start, timer, game];
     for (let i = 0; i < hiddenArray.length; i++) {
@@ -52,10 +52,12 @@ function wrongChoiceMajor() {
 
 /* main codes start here */
 
-var hiddenArray = [optionA, optionB, optionC, optionD, form];
+var hiddenArray = [optionA, optionB, optionC, optionD];
 for (let i = 0; i < hiddenArray.length; i++) {
     hiddenArray[i].style.visibility = 'hidden';
 };
+
+rank.textContent = "The previous player, " + localStorage.getItem("person") + ", with a score of " + localStorage.getItem("score5");
 
 document.getElementById('start').onclick = function() {
     var hiddenArray = [optionA, optionB, optionC, optionD];
@@ -203,18 +205,30 @@ optionA.onclick = function() {
                     notes.textContent = "";
                     var sumPrev4 = [localStorage.getItem("score4"), countDown];
                     var scoreFive = sumPrev4.reduce(getSum, 0);
-                    winCount.textContent = "correct! " + scoreFive + " point(s) are accumulated! This is the end of the quiz!";
+                    game.textContent = "correct! This is the end of the quiz!";
                     clearInterval(timerMajor);
-                    localStorage.setItem("score5", scoreFive);
                     var finalScore = scoreFive * countDown;
+                    localStorage.setItem("score5", finalScore);
                     final.textContent = "Your accumulated score is " + scoreFive + " , and you still have " + countDown + " seconds left.";
                     score.textContent = "Your final score is " + finalScore + "!";
-                    var hiddenArray = [optionA, optionB, optionC, optionD, start];
+                    var hiddenArray = [optionC, optionD, start];
                     for (let i = 0; i < hiddenArray.length; i++) {
                         hiddenArray[i].style.visibility = 'hidden';
                     }
-                    form.style.visibility = 'visible';
-
+                    optionA.textContent = "Log Your Score!";
+                    optionB.textContent = "Play Again!";
+                    optionB.onclick = function(){
+                        if (confirm("Thank you for playing!")){
+                            location.reload();
+                        };
+                    };
+                    optionA.onclick = function() {
+                        var person = (prompt("Please enter your name"));
+                        if (confirm("Thank you for playing!")){
+                            location.reload();
+                        };
+                        localStorage.setItem("person", person.valueOf());
+                    }
                 }
             }
         }
