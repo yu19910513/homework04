@@ -5,28 +5,73 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rex's Miniproject wk4</title>
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <button id='start' type="submit" name="button" value="enter"><strong> Press Me to Start/Next</strong></button>
-
+    <h1>Rex's First Full-Stack Quiz</h1>
+    <nav class="init">
+    <button id='start' type="submit" name="button" value="enter"><strong> Press Me to Start/ Next</strong></button>
+    </nav>
+    <div class="timersection">
+    <div id="timer"></div>
+    </div>
     <h2 id="main"></h2>
     <p id="warning"></p>
+<main class="button">
 <button class="optionA"></button>
 <button class="optionB"></button>
 <button class="optionC"></button>
 <button class="optionD"></button>
+</main>
 <div></div>
 
-    <h3 id="win"></h3>
-
-    <h4 id="lose"></h3>
-
-    <div id="timer"></div>
+<h4 id="lose"></h3>
 
 
-    <h5 id="notes">Do not disappoint me! You can do it!</h5>
-    <p id="final"></p>
-    <p id="score"></p>
+<section class="message">
+<h3 id="win"></h3>
+<p id="notes">Do not disappoint me! You can do it!</p>
+<p id="final"></p>
+<p id="score"></p>
+</section>
+<form class="form">
+        <fieldset>
+          <legend id="TITLE"><strong> Contact Me</strong></legend>
+          <div>
+            <label>Last Name, First Name</label>
+            <input type="text" placeholder="Yu, Rex"/>
+          </div>
+          <div>
+            <label>Company Name</label>
+            <input type="text" name="companyname" id="companyname" placeholder="e.g. Microsoft"/>
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <input type="text" placeholder="me@hotmail.com"/>
+          </div>
+          <div>
+            <label for="Industry">Industry</label>
+            <select name="Industry" id="Industryname">
+              <option value="0">---</option>
+              <option value="Technology">Technology</option>
+              <option value="Healthcare">Healthcare</option>
+              <option value="Bussiness">Bussiness</option>
+              <option value="Others">Others</option>
+            </select>
+          </div>
+          <div>
+            <label for="expiration">Date</label>
+            <input type="date" />
+          </div>
+          <div>
+            <label for="bio">Message</label>
+            <textarea name="about you" id="about" cols="20" rows="20" placeholder="I will respond to your message in 48 hours."></textarea>
+          </div>
+          <div>
+            <button type="submit">Add This Visitor</button>
+          </div>
+        </fieldset>
+      </form>
     <script src="./mini.js"></script>
 </body>
 </html>

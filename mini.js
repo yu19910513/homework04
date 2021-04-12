@@ -7,30 +7,39 @@ var notes = document.getElementById("notes");
 var warning = document.getElementById("warning");
 var final = document.getElementById("final");
 var score = document.getElementById("score");
+var form = document.querySelector(".form");
 
 var optionA = document.querySelector(".optionA");
 var optionB = document.querySelector(".optionB");
 var optionC = document.querySelector(".optionC");
 var optionD = document.querySelector(".optionD");
 
+/* my calculator */
 function getSum(total, num) {
     return total + Math.round(num);
-  }
+};
 
 function runOutOfTime() {
     notes.innerHTML = "You ran out of time! Game Over!!!";
-}
+    var hiddenArray = [optionB, optionC, optionD, optionA, start, timer, game];
+    for (let i = 0; i < hiddenArray.length; i++) {
+        hiddenArray[i].style.visibility = 'hidden';
+    }
+};
 
+/* timer */
 var countDown = 100;
 var timerMajor = setInterval(function (){
+    form.style.visibility = 'hidden';
     countDown--;
     timer.textContent = countDown + " seconds left till you lose!";
-    if (countDown === 0){
+    if (countDown <= 0){
         clearInterval(timerMajor);
         runOutOfTime();
     }
 } ,1000);
 
+/* time deduction */
 function wrongChoice() {
     countDown = countDown - 20;
 };
@@ -38,6 +47,8 @@ function wrongChoice() {
 function wrongChoiceMajor() {
     countDown = countDown - 50
 };
+
+/* main codes start here */
 
 document.getElementById('start').onclick = function() {
     game.textContent = "What does HTML stand for?";
@@ -58,8 +69,16 @@ optionA.onclick = function() {
     notes.textContent = "";
     winCount.textContent = "correct! " + countDown + " point(s) are accumulated! Press 'Next' to Continue!";
     localStorage.setItem("score1", countDown);
+    var hiddenArray = [optionB, optionC, optionD];
+    for (let i = 0; i < hiddenArray.length; i++) {
+        hiddenArray[i].style.visibility = 'hidden';
+    }
 
     document.getElementById('start').onclick = function() {
+        var hiddenArray = [optionA, optionB, optionC, optionD];
+        for (let i = 0; i < hiddenArray.length; i++) {
+            hiddenArray[i].style.visibility = 'visible';
+        };
         winCount.textContent = "";
         game.textContent = "What does JSON stand for?";
         optionA.textContent = "Java's Son";
@@ -81,8 +100,16 @@ optionA.onclick = function() {
         var scoreTwo = sumPrev.reduce(getSum, 0);
         winCount.textContent = "correct! " + scoreTwo + " point(s) are accumulated! Press 'Next' to Continue!";
         localStorage.setItem("score2", scoreTwo);
+        var hiddenArray = [optionB, optionA, optionD];
+        for (let i = 0; i < hiddenArray.length; i++) {
+            hiddenArray[i].style.visibility = 'hidden';
+        };
 
         document.getElementById('start').onclick = function() {
+            var hiddenArray = [optionA, optionB, optionC, optionD];
+            for (let i = 0; i < hiddenArray.length; i++) {
+                hiddenArray[i].style.visibility = 'visible';
+            };
             winCount.textContent = "";
             game.textContent = "What does CSS stand for?";
             optionA.textContent = "Color & Style Sheets";
@@ -104,8 +131,16 @@ optionA.onclick = function() {
             var scoreThree = sumPrev2.reduce(getSum, 0);
             winCount.textContent = "correct! " + scoreThree + " point(s) are accumulated! Press 'Next' to Continue!";
             localStorage.setItem("score3", scoreThree);
+            var hiddenArray = [optionB, optionC, optionA];
+            for (let i = 0; i < hiddenArray.length; i++) {
+                hiddenArray[i].style.visibility = 'hidden';
+            };
 
             document.getElementById('start').onclick = function() {
+                var hiddenArray = [optionA, optionB, optionC, optionD];
+                for (let i = 0; i < hiddenArray.length; i++) {
+                    hiddenArray[i].style.visibility = 'visible';
+                };
                 winCount.textContent = "";
                 game.textContent = "What does API stand for?";
                 optionA.textContent = "Application Programming Interface";
@@ -127,8 +162,16 @@ optionA.onclick = function() {
                 var scoreFour = sumPrev3.reduce(getSum, 0);
                 winCount.textContent = "correct! " + scoreFour + " point(s) are accumulated! Press 'Next' to Continue!";
                 localStorage.setItem("score4", scoreFour);
+                var hiddenArray = [optionB, optionC, optionD];
+                for (let i = 0; i < hiddenArray.length; i++) {
+                    hiddenArray[i].style.visibility = 'hidden';
+                };
 
                 document.getElementById('start').onclick = function() {
+                    var hiddenArray = [optionA, optionB, optionC, optionD];
+                    for (let i = 0; i < hiddenArray.length; i++) {
+                        hiddenArray[i].style.visibility = 'visible';
+                    };
                     winCount.textContent = "";
                     game.textContent = "How many hours [per week] should a bootcamp student usually spend to practice coding outside the class?";
                     optionA.textContent = "0";
@@ -155,6 +198,12 @@ optionA.onclick = function() {
                     var finalScore = scoreFive * countDown;
                     final.textContent = "Your accumulated score is " + scoreFive + " , and you still have " + countDown + " seconds left.";
                     score.textContent = "Your final score is " + finalScore + "!";
+                    var hiddenArray = [optionA, optionB, optionC, optionD];
+                    for (let i = 0; i < hiddenArray.length; i++) {
+                        hiddenArray[i].style.visibility = 'hidden';
+                    }
+                    form.style.visibility = 'visible';
+
                 }
             }
         }
