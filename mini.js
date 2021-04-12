@@ -37,7 +37,7 @@ function runOutOfTime() {
 };
 
 /* timer */
-var countDown = 1100;
+var countDown = 110;
 var timerMajor = setInterval(function (){
     countDown--;
     timer.textContent = countDown + " seconds are left";
