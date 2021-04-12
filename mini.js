@@ -14,13 +14,16 @@ var optionB = document.querySelector(".optionB");
 var optionC = document.querySelector(".optionC");
 var optionD = document.querySelector(".optionD");
 
+var loser = "You ran out of time! Game Over!!!";
+
 /* my calculator */
 function getSum(total, num) {
     return total + Math.round(num);
 };
 
 function runOutOfTime() {
-    notes.innerHTML = "You ran out of time! Game Over!!!";
+    var red
+    notes.innerHTML = loser.fontcolor("red");
     var hiddenArray = [optionB, optionC, optionD, optionA, start, timer, game];
     for (let i = 0; i < hiddenArray.length; i++) {
         hiddenArray[i].style.visibility = 'hidden';
@@ -30,9 +33,8 @@ function runOutOfTime() {
 /* timer */
 var countDown = 100;
 var timerMajor = setInterval(function (){
-    form.style.visibility = 'hidden';
     countDown--;
-    timer.textContent = countDown + " seconds left till you lose!";
+    timer.textContent = countDown + " seconds are left";
     if (countDown <= 0){
         clearInterval(timerMajor);
         runOutOfTime();
@@ -50,7 +52,16 @@ function wrongChoiceMajor() {
 
 /* main codes start here */
 
+var hiddenArray = [optionA, optionB, optionC, optionD, form];
+for (let i = 0; i < hiddenArray.length; i++) {
+    hiddenArray[i].style.visibility = 'hidden';
+};
+
 document.getElementById('start').onclick = function() {
+    var hiddenArray = [optionA, optionB, optionC, optionD];
+for (let i = 0; i < hiddenArray.length; i++) {
+    hiddenArray[i].style.visibility = 'visible';
+};
     game.textContent = "What does HTML stand for?";
     optionA.textContent = "Hypertext Markup Language";
     optionB.textContent = "Hypetext Markup Linguine";
@@ -198,7 +209,7 @@ optionA.onclick = function() {
                     var finalScore = scoreFive * countDown;
                     final.textContent = "Your accumulated score is " + scoreFive + " , and you still have " + countDown + " seconds left.";
                     score.textContent = "Your final score is " + finalScore + "!";
-                    var hiddenArray = [optionA, optionB, optionC, optionD];
+                    var hiddenArray = [optionA, optionB, optionC, optionD, start];
                     for (let i = 0; i < hiddenArray.length; i++) {
                         hiddenArray[i].style.visibility = 'hidden';
                     }
