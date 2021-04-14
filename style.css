@@ -115,13 +115,34 @@ img {
     border-radius: 5%;
     box-shadow: 5px 5px 8px grey;
     transform: rotate(8deg);
+    cursor: pointer;
+    padding: 1px;
+    background-color:gold;
+    border-style: groove;
 }
 img:hover {
-    transform: rotate(-7deg);
-    width: 100%;;
+    content: url(./zero.jpeg);
+    transform: rotate(-367deg);
+    width: 100%;
     margin-left: 0%;
-    transition: 0.8s;
+    transition: 0.9s;
     box-shadow: 15px 15px 18px 18px grey;
+    padding: 0px;
+    background-color: none;
+    border-style: none;
+}
+
+img:active{
+    content: url(./nothing.jpeg);
+    transform: rotate(367deg);
+    border-style: double;
+    padding: 0px;
+    background-color: none;
+    width: 40%;
+    margin-left: 30%;
+    transition: 0.7s;
+    box-shadow: 15px 15px 15px 15px grey;
+    image-orientation: from-image;
 }
 
 .message, #warning {
@@ -130,6 +151,12 @@ img:hover {
     text-align: center
 }
 
+footer {
+    padding: 30px;
+    clear: both;
+    font-family: monospace;
+    text-align: center;
+  }
 
 @media screen and (max-width: 768px) {
     .optionA, .optionB, .optionC, .optionD {
