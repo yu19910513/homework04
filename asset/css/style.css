@@ -121,7 +121,7 @@ img {
     border-style: groove;
 }
 img:hover {
-    content: url(./zero.jpeg);
+    content: url(../resources/zero.jpeg);
     transform: rotate(-367deg);
     width: 100%;
     margin-left: 0%;
@@ -133,7 +133,7 @@ img:hover {
 }
 
 img:active{
-    content: url(./nothing.jpeg);
+    content: url(../resources/nothing.jpeg);
     transform: rotate(367deg);
     border-style: double;
     padding: 0px;
